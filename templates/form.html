@@ -1,15 +1,24 @@
+{% extends "main.html" %}
+
+{% block content %}
+
 <center>
-    <!-- TODO Replace with username from basic authentication and count variable passed from python -->
     <div class="stock_form">
         <div class="form">
             <H5>Stock Submission Form</H5>
-            <form action="/form" method="post" enctype="multipart/form-data">
+            <form target="action="/form" method="post" enctype="multipart/form-data">
                 <input type="text" placeholder="AAPL" name="ticker_symbol"/>
                 <br>
                 <input type="number" placeholder="10.00" name="value"/>
                 <br>
-                <button type="submit">Submit</button>
+                <input type="range" min="1" max="10" value="5" class="slider" name="current_risk">
+                <br>
+                <input type="range" min="1" max="10" value="5" class="slider" name="future_risk">
+                <br>
+                <button type="submit">Submit</button></a>
             </form>
         </div>
     </div>
 </center>
+
+{% endblock %}
