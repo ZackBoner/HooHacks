@@ -1,9 +1,3 @@
-# IndieHedge
-
-## Authors: Zack Boner, Konrad Siebor, Harsh Padhye
-
-### Submission for HooHacks 2021
-
 ## Inspiration
 We were inspired towards this project by the recent massive rise and subsequent massive fall of the $GME stock. We noticed a massive number of retail investors taking on a substantial amount of financial risk; many of them unaware of the potential consequences. Without the vast knowledge and capital to properly mitigate risk like a hedge fund manager, retail investors are liable to the volatility and whims of the week's "hot stock". We wanted to develop an applet that would encourage users to safely diversify and secure their investments.  Our goal is to retain the thrill of short term trading with small- and mid-cap companies, all while abstracting away the details behind risk analysis.
 
