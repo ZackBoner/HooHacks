@@ -26,6 +26,9 @@ def submission_form():
             future_value = request.form.get("future_value", None)
             current_risk = request.form.get("current_risk", None)
             future_risk = request.form.get("future_risk", None)
+
+            #Zack put in ML code here
+
             # conditional checks to validate form 
             if float(value) > 0 and float(future_value) > 0 and float(future_value) < 1000000000 and str(ticker_symbol) in ticker_symbols:
                 return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, future_value=future_value, current_risk=current_risk, future_risk=future_risk))
