@@ -23,11 +23,15 @@
                 </div>
 
                 <label for="current_risk" class="form-label">How risky do you think this investment was?</label>
-                <input type="range" class="form-range" min="0" max="10" value="5" id="current_risk" name="current_risk">
+                <input type="range" class="form-range" min="1" max="5" value="1" id="current_risk" name="current_risk">
 
                 <label for="future_risk" class="form-label">How risky of an investment are you comfortable with in the future?</label>
-                <input type="range" class="form-range" min="0" max="10" value="5" id="future_risk" name="future_risk">   
+                <input type="range" class="form-range" min="1" max="5" value="1" id="future_risk" name="future_risk">   
 
+                <div id="slider_disclaimer" class="form-text">
+                    On a scale of 1 to 5, with 1 being the least risky and 5 being the most risky
+                </div>
+                <br>
                 <input class="btn btn-secondary" type="submit" value="Submit">
             </form>
         </div>

@@ -1,5 +1,8 @@
 from flask import *
 from flask_bootstrap import Bootstrap
+import pickle
+
+ticker_symbols = pickle.load(open("ticker_symbols.pkl", "rb"))
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -22,10 +25,13 @@ def submission_form():
             value = request.form.get("value", None)
             current_risk = request.form.get("current_risk", None)
             future_risk = request.form.get("future_risk", None)
-            return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, current_risk=current_risk, future_risk=future_risk))
+            if float(value) >= 0 and str(ticker_symbol) in ticker_symbols:
+                return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, current_risk=current_risk, future_risk=future_risk))
+            else:
+                return redirect(url_for('invalid_form'))
         except:
             print("Failed submission")
-            return redirect(url_for('home_page'))
+            return redirect(url_for('invalid_form'))
 
 @app.route('/invalid_form')
 def invalid_form():
