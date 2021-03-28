@@ -1,3 +1,4 @@
+python=3.8.8
 gunicorn 
 flask
 Flask-Bootstrap
@@ -7,4 +8,3 @@ pandas
 numpy
 scipy
 yahoofinancials
-
