@@ -10,7 +10,7 @@
             <form action="/form" method="post" enctype="multipart/form-data">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Ticker</span>
+                        <span class="input-group-text" id="basic-addon1">Ticker Symbol</span>
                     </div>
                     <input type="text" class="form-control" id="ticker_symbol" name="ticker_symbol" placeholder="AAPL">
                 </div>
@@ -19,9 +19,22 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Value: $</span>
                     </div>
-                    <input type="number" step="0.01" class="form-control" id="value" name="value" placeholder="100">
+                    <input type="number" step="0.01" class="form-control" id="value" name="value" placeholder="100.00">
                 </div>
-
+                <div id="slider_disclaimer" class="form-text">
+                    Total value of your investment in this stock at the time of purchase
+                </div>
+                <br>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Future Investment: $</span>
+                    </div>
+                    <input type="number" step="0.01" class="form-control" id="future_value" name="future_value" placeholder="100.00">
+                </div>
+                <div id="slider_disclaimer" class="form-text">
+                    How much you are willing to spend on an additional investment in the near term future
+                </div>
+                <br>
                 <label for="current_risk" class="form-label">How risky do you think this investment was?</label>
                 <input type="range" class="form-range" min="1" max="5" value="1" id="current_risk" name="current_risk">
 

@@ -23,10 +23,12 @@ def submission_form():
         try:
             ticker_symbol = request.form.get("ticker_symbol", None)
             value = request.form.get("value", None)
+            future_value = request.form.get("future_value", None)
             current_risk = request.form.get("current_risk", None)
             future_risk = request.form.get("future_risk", None)
-            if float(value) >= 0 and str(ticker_symbol) in ticker_symbols:
-                return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, current_risk=current_risk, future_risk=future_risk))
+            # conditional checks to validate form 
+            if float(value) > 0 and float(future_value) > 0 and float(future_value) < 1000000000 and str(ticker_symbol) in ticker_symbols:
+                return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, future_value=future_value, current_risk=current_risk, future_risk=future_risk))
             else:
                 return redirect(url_for('invalid_form'))
         except:
@@ -37,10 +39,10 @@ def submission_form():
 def invalid_form():
     return render_template('invalid_form.html')
 
-@app.route('/recommendation/<ticker_symbol>/<value>/<current_risk>/<future_risk>', methods=['GET', 'POST'])
-def recommendation_page(ticker_symbol, value, current_risk, future_risk):
+@app.route('/recommendation/<ticker_symbol>/<value>/<future_value>/<current_risk>/<future_risk>', methods=['GET', 'POST'])
+def recommendation_page(ticker_symbol, value, future_value, current_risk, future_risk):
     if request.method == 'GET':
-        return render_template('recommendation.html', ticker_symbol=ticker_symbol, value=value, current_risk=current_risk, future_risk=future_risk)
+        return render_template('recommendation.html', ticker_symbol=ticker_symbol, value=value, future_value=future_value, current_risk=current_risk, future_risk=future_risk)
 
 if __name__ == "__main__":
     from waitress import serve
