@@ -1,8 +1,10 @@
 from flask import *
 from flask_bootstrap import Bootstrap
 import pickle
+from recommendations_and_risk import RecommendAndEvaluateStocks
 
 ticker_symbols = pickle.load(open("ticker_symbols.pkl", "rb"))
+recs = RecommendAndEvaluateStocks()
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -28,6 +30,12 @@ def submission_form():
             future_risk = request.form.get("future_risk", None)
 
             #Zack put in ML code here
+
+            #output format e.g. ['GME', 'AAPL', 'MSE', ...]
+            recommended_stocks = list(recs.recommend_stock(future_risk, ticker_symbol, value, future_value).index)
+
+            # how much the user's perceived risk deviates from the risk we predict for the stock
+            risk_delta = recs.evaluate_perceived_risk(current_risk, ticker_symbol)
 
             # conditional checks to validate form 
             if float(value) > 0 and float(future_value) > 0 and float(future_value) < 1000000000 and str(ticker_symbol) in ticker_symbols:
