@@ -1,5 +1,9 @@
 gunicorn 
 flask
-flask-bootstrap
+Flask-Bootstrap
 Jinja2
 waitress
+pandas
+numpy
+scipy
+yahoofinancials
