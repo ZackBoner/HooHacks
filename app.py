@@ -23,38 +23,38 @@ def submission_form():
     if request.method == 'GET':
         return render_template('form.html')
     elif request.method == 'POST':
-        try:
-            ticker_symbol = request.form.get("ticker_symbol", None)
-            value = request.form.get("value", None)
-            future_value = request.form.get("future_value", None)
-            current_risk = request.form.get("current_risk", None)
-            future_risk = request.form.get("future_risk", None)
+        #try:
+        ticker_symbol = request.form.get("ticker_symbol", None)
+        value = request.form.get("value", None)
+        future_value = request.form.get("future_value", None)
+        current_risk = request.form.get("current_risk", None)
+        future_risk = request.form.get("future_risk", None)
 
-            #Zack put in ML code here
+        #Zack put in ML code here
 
-            #output format e.g. ['GME', 'AAPL', 'MSE', ...]
-            recommended_stocks = list(recs.recommend_stock(future_risk, ticker_symbol, value, future_value).index)
+        #output format e.g. ['GME', 'AAPL', 'MSE', ...]
+        recommended_stocks = list(recs.recommend_stock(int(future_risk), str(ticker_symbol), float(value), float(future_value)).index)
 
-            # how much the user's perceived risk deviates from the risk we predict for the stock
-            risk_delta = recs.evaluate_perceived_risk(current_risk, ticker_symbol)
+        # how much the user's perceived risk deviates from the risk we predict for the stock
+        risk_delta = recs.evaluate_perceived_risk(int(current_risk), str(ticker_symbol))
 
-            def validate_form(ticker_symbol, value, future_value):
-                if not ( 0 < float(value) < 10000000 ):
-                    print(f"Invalid value: {float(value)}", file=sys.stderr)
-                    return False
-                if str(ticker_symbol) not in ticker_symbols:
-                    print(f"Invalid ticker: {str(ticker_symbol)}", file=sys.stderr)
-                    return False
-                return True
+        def validate_form(ticker_symbol, value, future_value):
+            if not ( 0 < float(value) < 10000000 ):
+                print(f"Invalid value: {float(value)}", file=sys.stderr)
+                return False
+            if str(ticker_symbol) not in ticker_symbols:
+                print(f"Invalid ticker: {str(ticker_symbol)}", file=sys.stderr)
+                return False
+            return True
 
-            # conditional checks to validate form 
-            if validate_form(ticker_symbol, value, future_value):
-                return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, future_value=future_value, current_risk=current_risk, future_risk=future_risk))
-            else:
-                return redirect(url_for('invalid_form'))
-        except:
-            print("Failed submission")
-            return redirect(url_for('invalid_form'))
+        # conditional checks to validate form 
+        #if validate_form(ticker_symbol, value, future_value):
+        return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, future_value=future_value, current_risk=current_risk, future_risk=future_risk))
+        #else:
+        #    return redirect(url_for('invalid_form'))
+        # except:
+        #     print("Failed submission")
+        #     return redirect(url_for('invalid_form'))
 
 @app.route('/invalid_form')
 def invalid_form():
