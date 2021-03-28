@@ -2,13 +2,28 @@
 
 {% block content %}
 
+<center>
 <h1>Submitted successfully</h1>
 
 <input type="hidden" name="username" id="user" value="{{username}}">
 
-<text>{{ticker_symbol}}</text><br>
-<text>{{value}}</text><br>
-<text>{{current_risk}}</text><br>
+<text>{{ticker_symbol}}</text>
+<text>{{value}}</text>
+<text>{{current_risk}}</text>
 <text>{{future_risk}}</text>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Recomendations
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" style="color: red;">Risky</li>
+      <li class="list-group-item" style="color: orange;">Medium</li>
+      <li class="list-group-item" style="color: green;">Safe</li>
+    </ul>
+</div>
+
+</center>
+
 
 {% endblock %}
