@@ -2,6 +2,7 @@ from flask import *
 from flask_bootstrap import Bootstrap
 import pickle
 from recommendations_and_risk import RecommendAndEvaluateStocks
+import sys
 
 ticker_symbols = pickle.load(open("ticker_symbols.pkl", "rb"))
 recs = RecommendAndEvaluateStocks()
@@ -37,8 +38,17 @@ def submission_form():
             # how much the user's perceived risk deviates from the risk we predict for the stock
             risk_delta = recs.evaluate_perceived_risk(current_risk, ticker_symbol)
 
+            def validate_form(ticker_symbol, value, future_value):
+                if not ( 0 < float(value) < 10000000 ):
+                    print(f"Invalid value: {float(value)}", file=sys.stderr)
+                    return False
+                if str(ticker_symbol) not in ticker_symbols:
+                    print(f"Invalid ticker: {str(ticker_symbol)}", file=sys.stderr)
+                    return False
+                return True
+
             # conditional checks to validate form 
-            if float(value) > 0 and float(future_value) > 0 and float(future_value) < 1000000000 and str(ticker_symbol) in ticker_symbols:
+            if validate_form(ticker_symbol, value, future_value):
                 return redirect(url_for('recommendation_page', ticker_symbol=ticker_symbol, value=value, future_value=future_value, current_risk=current_risk, future_risk=future_risk))
             else:
                 return redirect(url_for('invalid_form'))
