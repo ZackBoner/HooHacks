@@ -62,7 +62,7 @@ def submission_form():
             else:
                 future_risk_tag = 0
 
-            risk_delta =  abs(int(current_risk)-risk)
+            risk_delta = abs(int(current_risk)-risk)
             if risk_delta >= 2:
                 bad_risk_assessment_tag = 1
             else:
@@ -116,4 +116,4 @@ def recommendation_page(ticker_symbol, value_each, risk_tag, future_risk_tag, ba
 #     from waitress import serve
 #     serve(app, host="0.0.0.0", port=8080)
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
