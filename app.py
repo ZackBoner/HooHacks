@@ -17,9 +17,9 @@ app.config['SECRET_KEY'] = b'\xea\x81X\xda@ ja\xcd\xbb\xf2\x1f\x9d\xda\x8d\x89"\
 def home_page():
     return render_template('home.html')
 
-# @app.route('/about')
-# def about():
-#     return render_template('about.html')
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/form', methods=['GET', 'POST'])
 def submission_form():
