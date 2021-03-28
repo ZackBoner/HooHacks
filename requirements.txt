@@ -1,6 +1,10 @@
 gunicorn 
-Flask
-flask-bootstrap
+flask
+Flask-Bootstrap
 Jinja2
-Werkzeug
 waitress
+pandas
+numpy
+scipy
+yahoofinancials
+
