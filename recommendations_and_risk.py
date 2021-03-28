@@ -41,6 +41,8 @@ class RecommendAndEvaluateStocks:
                     'priceToSalesTrailing12Months', 'fiftyTwoWeekHigh', 'forwardPE',
                     'fiftyTwoWeekLow']
             stock_data = yf.YahooFinancials(ticker_bought).get_summary_data()
+            if stock_data[ticker_bought] is None:
+                raise ValueError("Invalid ticker!")
             stock_data = pd.DataFrame.from_dict(stock_data, orient='index')
             stock_data_df = stock_data[columns]
         return stock_data_df
@@ -84,7 +86,7 @@ class RecommendAndEvaluateStocks:
         n_most_similar = self.n_most_similar_stocks(stocks_available, stock_vector, n_stocks)
         return n_most_similar
     
-    def evaluate_perceived_risk(self, perceived_risk, ticker_bought):
+    def evaluate_risk(self, ticker_bought):
         stock = self.get_stock_vector(ticker_bought)
         cluster = self.clusterer.predict(stock[['beta','marketCap']])[0]
         
@@ -99,8 +101,7 @@ class RecommendAndEvaluateStocks:
         elif cluster == 4:
             risk = 2
         
-        risk_delta = risk - perceived_risk
-        return risk_delta
+        return risk
 
 if __name__ == "__main__":
     recs = RecommendAndEvaluateStocks()

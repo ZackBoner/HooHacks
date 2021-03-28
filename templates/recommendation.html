@@ -3,31 +3,87 @@
 {% block content %}
 
 <center>
-<h1>Submitted successfully</h1>
+<h1>Stock Recommendations</h1>
 
 <input type="hidden" name="username" id="user" value="{{username}}">
 
-<!-- <text>{{ticker_symbol}}</text>
-<text>{{value}}</text>
-<text>{{future_value}}</text>
-<text>{{current_risk}}</text>
-<text>{{future_risk}}</text> -->
 
-Based on your willingness to take on future risk, 
+</p>Based on your willingness to take on future risk, 
+we suggest purchasing ${{value_each}} each of the following stocks:</p>
 
-we suggest purchasing the following stocks:
 
 <div class="card" style="width: 18rem;">
     <div class="card-header">
         Recommendations
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" style="color: red;">{{stocks}}</li>
-      <!-- <li class="list-group-item" style="color: orange;">Medium</li>
-      <li class="list-group-item" style="color: green;">Safe</li> -->
+      {% if future_risk_tag == "2" %}
+        {% for stock in stocks %}
+          <li class="list-group-item" style="color: green;">{{stock}} 
+            <br><a href="https://www.google.com/search?q={{stock}}+stock" target="_blank" rel="noopener noreferrer">Find on Google</a></li>
+        {% endfor %}
+      {% endif %}
+      {% if future_risk_tag == "1" %}
+        {% for stock in stocks %}
+          <li class="list-group-item" style="color: orangered;">{{stock}} 
+            <br><a href="https://www.google.com/search?q={{stock}}+stock" target="_blank" rel="noopener noreferrer">Find on Google</a></li>
+        {% endfor %}
+      {% endif %}  
+      {% if future_risk_tag == "0" %}
+        {% for stock in stocks %}
+          <li class="list-group-item" style="color: orange;">{{stock}} 
+            <br><a href="https://www.google.com/search?q={{stock}}+stock" target="_blank" rel="noopener noreferrer">Find on Google</a></li>
+        {% endfor %}
+      {% endif %}
     </ul>
 </div>
 
+{% if risk_tag == "1" %}
+</p> You invested in a higher risk stock.
+Consider investing in the proposed safer options:</p>
+{% endif %}
+
+{% if risk_tag == "2" %}
+</p> You invested in a low risk stock.
+Consider trying out a higher risk option for larger returns: </p>
+{% endif %}
+
+{% if risk_tag == "0" %}
+</p> You invested in a medium risk stock.
+Consider diversifying your portfolio and trying out some higher and some lower risk options: </p>
+{% endif %}
+
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+      Recommendations
+  </div>
+  <ul class="list-group list-group-flush">
+    {% if risk_tag == "2" %}
+        {% for stock in secondary_stocks %}
+          <li class="list-group-item" style="color: orange;">Medium risk: {{stock}} 
+            <br><a href="https://www.google.com/search?q={{stock}}+stock" target="_blank" rel="noopener noreferrer">Find on Google</a></li>
+        {% endfor %}
+      {% endif %}
+      {% if risk_tag == "1" %}
+        {% for stock in secondary_stocks %}
+        <li class="list-group-item" style="color: green;">Safe: {{stock}} 
+          <br><a href="https://www.google.com/search?q={{stock}}+stock" target="_blank" rel="noopener noreferrer">Find on Google</a></li>
+        {% endfor %}
+      {% endif %}  
+      {% if risk_tag == "0" %}
+        {% for stock in secondary_stocks %}
+          <li class="list-group-item" style="color: black;">Alternative: {{stock}} 
+            <br><a href="https://www.google.com/search?q={{stock}}+stock" target="_blank" rel="noopener noreferrer">Find on Google</a></li>
+        {% endfor %}
+      {% endif %}
+  </ul>
+</div>
+
+{% if bad_risk_assessment_tag == "1" %}
+</p>Your estimate of the risk of your investment did not match ours. 
+Learn more about risk assessment at
+<a href="https://www.investopedia.com/terms/r/riskmeasures.asp#:~:text=There%20are%20five%20principal%20risk,standard%20deviation%2C%20and%20Sharpe%20ratio." target="_blank" rel="noopener noreferrer">Investopedia</a>!</p>
+{% endif %}
 </center>
 
 
