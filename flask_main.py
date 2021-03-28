@@ -44,6 +44,8 @@ def recommendation_page(ticker_symbol, value, future_value, current_risk, future
     if request.method == 'GET':
         return render_template('recommendation.html', ticker_symbol=ticker_symbol, value=value, future_value=future_value, current_risk=current_risk, future_risk=future_risk)
 
+# if __name__ == "__main__":
+#     from waitress import serve
+#     serve(app, host="0.0.0.0", port=8080)
 if __name__ == "__main__":
-    from waitress import serve
-    serve(app, host="0.0.0.0", port=8080)
+    app.run()
